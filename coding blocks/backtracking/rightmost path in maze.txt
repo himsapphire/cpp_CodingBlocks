@@ -1,0 +1,73 @@
+#include<iostream>
+using namespace std;
+//checking conditions
+bool issafe(char a[1000][1000],int v[1000][1000],int x,int y,int n,int m){
+     if(x>=0 && x<n && y>=0 && y<m && a[x][y]=='O' && v[x][y]==0)
+	    return true;
+	else
+	   return false;	
+}
+bool solve(char a[1000][1000],int v[1000][1000],int x,int y,int n,int m){
+
+	//base case
+	if(x==n-1 && y==m-1)
+	{
+		v[x][y]=1;
+		//print solution matrix
+		for(int i=0;i<n;i++){
+			for(int j=0;j<m;j++){
+				cout<<v[i][j]<<" ";
+			}
+			cout<<endl;
+		}
+		return true;
+	}
+	//considering succes from this cell
+	v[x][y]=1;
+
+	//for right
+	int newx=x;
+	int newy=y+1;
+	if(issafe(a,v,newx,newy,n,m)){
+		if(solve(a,v,newx,newy,n,m))
+		{
+			v[newx][newy]=0;
+			return  true;
+		}
+	}
+
+	//for down
+	 newx=x+1;
+	 newy=y;
+	if(issafe(a,v,newx,newy,n,m)){
+		if(solve(a,v,newx,newy,n,m)){
+            v[newx][newy]=0;
+			return true;
+
+		}
+	}
+   
+   //backtracking
+   v[x][y]=0;
+   return false;
+
+}
+int main(){
+	int n,m;cin>>n>>m;
+	//our maze
+	char a[1000][1000];
+	for(int i=0;i<n;i++){
+		for(int j=0;j<m;j++)
+		  cin>>a[i][j];
+	}
+    
+	//our visited array
+	int v[1000][1000]={0};
+
+	bool ans= solve(a,v,0,0,n,m);
+
+	if(!ans)
+	  cout<<-1;
+	  
+return 0;
+}

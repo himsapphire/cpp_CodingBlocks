@@ -1,0 +1,48 @@
+1. t.c.  O(n)  and s.c.  O(n)
+
+#include<iostream>
+#include<stack>
+using namespace std;
+void solve(int arr[],int n,int ph[]){
+
+	//stack to store index of previous highest
+	//if not +st then -1
+    stack<int> s;
+	for(int i=0;i<n;i++){
+		while(!s.empty() && arr[s.top()]<=arr[i])
+		    s.pop();
+
+		if(s.empty())
+		  ph[i]=-1;
+		else
+		ph[i]=s.top();
+
+	 s.push(i);	  	
+	}
+	for(int i=0;i<n;i++){
+		if(ph[i]==-1)
+		//if we are not getting any highest then simply print index+1
+		  cout<<i+1<<" ";
+		else
+		  cout<<i-ph[i]<<" ";
+
+	}
+	cout<<"END";
+
+}
+
+
+int main() {
+	int n;cin>>n;
+
+	//array having our prices;
+	int arr[n];
+	for(int i=0;i<n;i++)
+	    cin>>arr[i];
+
+    //array to store the previous highest price's index
+	int ph[n];
+	solve(arr,n,ph);	
+	
+	return 0;
+}

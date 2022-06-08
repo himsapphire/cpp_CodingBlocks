@@ -1,0 +1,59 @@
+#include<iostream>
+using namespace std;
+class node{
+      public:
+	  int data;
+	  node* next;
+	  node(int d){
+		  data=d;
+		  next=NULL;
+	  }
+};
+void insert(node*&head,int data){
+   if(head==NULL){
+	   head=new node(data);
+	   return;
+   }
+   node* temp =head;
+   while(temp->next!=NULL){
+	   temp=temp->next;
+   }
+   temp->next=new node(data);
+   return;
+}
+void print(node* head)
+{
+	while(head!=NULL){
+		cout<<head->data<<" ";
+		head=head->next;
+	}
+}
+int main() {
+	int x,j;cin>>x;
+	node* head=NULL;
+	while(x){
+		cin>>j;
+		insert(head,j);
+		x--;
+	}
+	node* odd=NULL;
+	node* even=NULL;
+	while(head!=NULL){
+		if(head->data%2==0)
+		   insert(even,head->data);
+		else
+		insert(odd,head->data);
+		head=head->next;
+	}
+	node* newhead=odd;
+	while(odd->next!=NULL){
+		odd=odd->next;
+	}
+	odd->next=even;
+
+	print(newhead);
+
+
+
+	return 0;
+}

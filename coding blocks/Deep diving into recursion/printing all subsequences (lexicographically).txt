@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+void solve(int idx,char a[20],vector<char>& ds , int n,vector<vector<char>>& ans){
+  //base case
+  if(idx==n){
+       ans.push_back(ds);
+    return;
+  }
+
+  //recursive case
+  //1, taking the element
+
+  //2.not taking element
+  solve(idx+1,a,ds,n,ans);
+
+
+  ds.push_back(a[idx]);
+  solve(idx+1,a,ds,n,ans);
+  ds.pop_back();
+
+}
+int main() {
+	int t;cin>>t;
+	while(t){
+      char a[20];
+	  cin>>a;
+      vector<char> ds; vector<vector<char>> ans;
+	  int n=strlen(a);
+	  solve(0,a,ds,n,ans);
+
+
+    // Sort the whole array in lexicographically
+    sort(ans.begin(), ans.end());
+	  for (int i = 0; i < ans.size(); ++i) {
+        for (int j = 0; j < ans[i].size();
+             ++j) {
+            cout<< ans[i][j];
+        }
+        cout << endl;
+    }
+      t--;
+	}
+	return 0;
+}

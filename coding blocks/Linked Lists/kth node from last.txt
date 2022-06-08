@@ -1,0 +1,48 @@
+#include<iostream>
+using namespace std;
+class node{
+      public:
+	  int data;
+	  node* next;
+	  node(int d){
+		  data=d;
+		  next=NULL;
+	  }
+};
+void insertattail(node*&head,int data){
+    if(head==NULL)
+	  {
+		  head=new node(data);
+		  return;
+	  }
+     node* temp=head;
+	 while(temp->next!=NULL){
+		 temp=temp->next;
+	 }
+     temp->next =new node(data);
+	 return;
+
+}
+int main() {
+	int x;int k;
+	cin>>x;
+	node* head=NULL;
+	while(x!=-1){
+		insertattail(head,x);
+		cin>>x;
+	}
+	cin>>k;
+	node* fast=head;
+	node* slow=head;
+	while(k-1){
+		fast=fast->next;
+		k--;
+	}
+	while(fast->next!=NULL){
+		fast=fast->next;
+		slow=slow->next;
+	}
+   cout<<slow->data;
+
+	return 0;
+}

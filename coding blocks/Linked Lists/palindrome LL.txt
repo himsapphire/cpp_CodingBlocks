@@ -1,0 +1,52 @@
+#include<iostream>
+using namespace std;
+class node{
+      public:
+	  int data;
+	  node* next;
+	  node(int d){
+		  data=d;
+		  next=NULL;
+	  }
+};
+void insert(node*&head,int data){
+   if(head==NULL){
+	   head=new node(data);
+	   return;
+   }
+   node* temp =head;
+   while(temp->next!=NULL){
+	   temp=temp->next;
+   }
+   temp->next=new node(data);
+   return;
+}
+void print(node* head){
+   while(head!=NULL){
+    cout<<head->data<<" ";
+    head=head->next;
+   }
+}
+//recursively reversiing LL
+
+
+node* recrev(node*head){
+   if(head==NULL or head->next==NULL)
+       return head;
+   
+   node* smallhead=recrev(head->next);
+   head->next->next=head;
+   head->next=NULL;
+   return smallhead;
+}
+int main() {
+	int x,j;cin>>x;
+	node* head=NULL;
+	while(x){
+		cin>>j;
+		insert(head,j);
+		x--;
+	}
+	node* newhead=recrev(head);
+	print(newhead);
+	}

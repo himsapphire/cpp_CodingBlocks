@@ -1,0 +1,35 @@
+1. Brute force 
+traversing for each element the whole array evrytime, thus O(n2)
+
+
+2. using stack makes it O(n) t.c.   O(n) stack space
+
+
+void nextGreater(int arr[], int n) 
+{ 
+  stack<int> s; 
+  
+  //storing our answers in an array
+  int ng[n];
+  for(int i=n-1;i>=0;i--){
+      //pop until u find the next greater
+     while(!s.empty() && s.top()<=arr[i])
+         s.pop();
+    
+    if(s.empty())
+       ng[i]=-1;
+    else
+       ng[i]=s.top();   
+
+    s.push(arr[i]);
+
+  }
+
+  // printing the array
+  for(int i=0;i<n;i++)
+     cout<<arr[i]<<","<<ng[i]<<endl;
+
+
+
+
+} 

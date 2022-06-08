@@ -1,0 +1,43 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+int l=0;
+void solve(int i,char a[],vector<char> ds){
+  //base case
+  if(a[i]=='\0'){
+	  l++;
+	  int k=ds.size();
+	  for(int j=0;j<k;j++)
+	    cout<<ds[j];
+		cout<<" ";
+		return;
+  }
+
+//recursive case
+
+//2.not picking the letter
+
+solve(i+1,a,ds);
+
+//1.picking the letter
+
+ds.push_back(a[i]);
+solve(i+1,a,ds);
+//pop the element while backtracking
+ds.pop_back();
+
+
+
+
+}
+int main() {
+	char a[1000];
+	cin>>a;
+	//for storing subsequences,lets take a vector 
+	vector<char> ds;
+    
+	solve(0,a,ds);
+	cout<<endl;
+	cout<<l;
+	return 0;
+}

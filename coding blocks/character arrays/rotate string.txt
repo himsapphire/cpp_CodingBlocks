@@ -1,0 +1,52 @@
+1. t.c.  kn
+
+
+#include<iostream>
+#include<cstring>
+using namespace std;
+int main(){
+  char a[1000]= {"hello"};
+  int n=strlen(a)-1;
+  int k=3;
+
+  while(k){
+    char b=a[n];
+    for(int i=n-1;i>=0;i--)
+        a[i+1]=a[i];
+    a[0]=b;
+    k--;
+  }
+ cout<<a;
+
+return 0;
+}
+
+
+2. t.c. O(n)
+
+#include<iostream>
+#include<cstring>
+using namespace std;
+int main(){
+char a[1000]={"hello"};
+//how much to rotate
+int k=3;
+
+int n=strlen(a);  //length of string
+int i=n-1;
+// shifting all elements by k forward
+while(i>=0){
+    a[i+k]=a[i];
+    i--;
+}
+
+i=0;int j=n;
+while(i<k){
+    a[i]=a[j];
+    i++;j++;
+}
+a[n]='\0';
+cout<<a;
+}
+
+
